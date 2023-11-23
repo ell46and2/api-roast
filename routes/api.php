@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Company\IndexCompanyController;
+use App\Http\Controllers\Api\Company\StoreCompanyController;
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', fn (Request $request) => $request->user());
+Route::prefix('v1')->name('.v1')->group(function (): void {
+    Route::middleware(['auth:sanctum'])->group(function (): void {
+        Route::get('/user', [UsersController::class, 'show']);
+    });
+
+    Route::get('/companies', IndexCompanyController::class)
+        ->name('.companies.index')
+        ->middleware(['auth:sanctum']);
+
+    Route::post('/companies', StoreCompanyController::class)
+        ->name('.companies.store')
+        ->middleware(['auth:sanctum']);
+});
