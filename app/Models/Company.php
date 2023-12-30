@@ -37,9 +37,22 @@ class Company extends Model
         'added_by',
     ];
 
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'roaster' => 'boolean',
+        'subscription' => 'boolean',
+    ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     /** @return BelongsTo<User, Company> */
     public function addedBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'addedBy');
+        return $this->belongsTo(User::class, 'added_by', 'id');
     }
 }

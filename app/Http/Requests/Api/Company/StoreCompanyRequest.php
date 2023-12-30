@@ -84,9 +84,6 @@ class StoreCompanyRequest extends FormRequest
                 'required_with:cafe',
                 'string',
             ],
-            'cafe.country' => [
-                'required_with:cafe',
-            ],
         ];
     }
 
@@ -129,7 +126,6 @@ class StoreCompanyRequest extends FormRequest
             'cafe.city.required_with' => 'A city is required for this cafe',
             'cafe.city.string' => 'A city must be a string',
             'cafe.zip.required_with' => 'A zip is required for this cafe',
-            'cafe.country.required_with' => 'A country is required for this cafe'
         ];
     }
 
@@ -177,7 +173,6 @@ class StoreCompanyRequest extends FormRequest
             address: $this->string('cafe.address')->toString(),
             city: $this->string('cafe.city')->toString(),
             zip: $this->string('cafe.zip')->toString(),
-            country: $this->integer('cafe.country'),
         );
     }
 }

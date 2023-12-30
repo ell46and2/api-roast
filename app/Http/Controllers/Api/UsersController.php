@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\UserResource;
 
 class UsersController extends Controller
 {
-    public function show(): JsonResponse
+    /**
+     * @group User
+     *
+     * Get the authenticated user
+     *
+     * @apiResource App\Http\Resources\UserResource
+     */
+    public function show(): UserResource
     {
-        return response()->json(authenticatedUser());
+        return new UserResource(authenticatedUser());
     }
 }

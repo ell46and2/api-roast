@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\Company\IndexCompanyController;
+use App\Http\Controllers\Api\Company\ShowCompanyController;
 use App\Http\Controllers\Api\Company\StoreCompanyController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,10 @@ Route::prefix('v1')->name('.v1')->group(function (): void {
     });
 
     Route::get('/companies', IndexCompanyController::class)
-        ->name('.companies.index')
-        ->middleware(['auth:sanctum']);
+        ->name('.companies.index');
+
+    Route::get('/companies/{company}', ShowCompanyController::class)
+        ->name('.companies.show');
 
     Route::post('/companies', StoreCompanyController::class)
         ->name('.companies.store')

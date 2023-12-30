@@ -15,7 +15,16 @@ class CafeStoreData extends Data
         public readonly string $address,
         public readonly string $city,
         public readonly string $zip,
-        public readonly int $country,
     ) {
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'location_name' => $this->locationName,
+            'address' => $this->address,
+            'city' => $this->city,
+            'zip' => $this->zip,
+        ];
     }
 }

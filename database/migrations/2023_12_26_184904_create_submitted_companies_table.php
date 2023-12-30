@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('companies', function (Blueprint $table): void {
+        Schema::create('submitted_companies', function (Blueprint $table): void {
             $table->id();
+
             $table->string('name')->unique();
             $table->text('header_image_url')->nullable();
             $table->text('logo_url')->nullable();
@@ -30,8 +31,11 @@ return new class () extends Migration {
 
             $table->boolean('roaster');
             $table->boolean('subscription');
+            $table->boolean('deleted');
+            $table->integer('status');
 
             $table->foreignId('added_by')->index()->constrained('users');
+            $table->foreignId('company_id')->nullable()->constrained();
 
             $table->softDeletes();
             $table->timestamps();
@@ -40,6 +44,6 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('submitted_companies');
     }
 };

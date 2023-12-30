@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\actions\Company;
 
+use App\actions\Cafe\CreateCafeAction;
 use App\actions\UploadFileAction;
 use App\Dto\Company\CompanyStoreData;
 use App\Models\Company;
@@ -23,7 +24,7 @@ class CreateCompanyAction
         ]);
 
         if ($data->cafe) {
-            app(CreateCafeAction::class)->execute($data->cafe);
+            app(CreateCafeAction::class)->execute($data->cafe, $company);
         }
 
         return $company;
